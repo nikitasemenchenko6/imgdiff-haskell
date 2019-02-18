@@ -14,13 +14,13 @@ main =
       let scaledDown = "test-png-scaled-down.png"
       let damaged = "test-png-damaged.png"
       it "Original vs Scaled Down - same" $ do
-        r <- distance orig scaledDown
+        r <- avgDistance orig scaledDown
         r `shouldBe` 0
       it "Original vs Damaged - 1%" $ do
-        r <- distance orig damaged
+        r <- avgDistance orig damaged
         r `shouldBe` 3
       it "Scaled Down vs Damaged - 1%" $ do
-        r <- distance scaledDown damaged
+        r <- avgDistance scaledDown damaged
         r `shouldBe` 3
       it "Not existed file, thorow exception" $ do
-        (evaluate . force =<< (distance "not-existed-file.png" damaged)) `shouldThrow` anyException
+        (evaluate . force =<< (avgDistance "not-existed-file.png" damaged)) `shouldThrow` anyException

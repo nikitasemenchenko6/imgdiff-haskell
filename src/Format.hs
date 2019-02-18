@@ -1,18 +1,20 @@
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE Trustworthy       #-}
 
 module Format where
 
 import           Data.Text.Lazy
 import           Data.Text.Lazy.Builder (Builder)
+import           Data.Typeable
 import           Formatting
 import           Formatting.Formatters
-import           Data.Typeable
 
-leadingBinary :: Integral a => a -> String
-leadingBinary a = show $ format prefixBin a
+leadingBinary :: Integral a => a -> Text
+leadingBinary = format prefixBin
 
-typeWithVal :: (Show a, Typeable a) => a -> String
-typeWithVal a = show $ format ("Type: " % shown % ", Val: " % shown) (show $ typeOf a) a
+typeWithVal :: (Show a, Typeable a) => a -> Text
+typeWithVal a = format ("Type: " % shown % ", Val: " % shown) (show $ typeOf a) a
 
-differenceToString :: Integral a => a -> String
-differenceToString diff = show $ format ("Diffeernce: " % int % "%") diff
+differenceToString :: Integral a => a -> Text
+differenceToString = format ("Diffeernce: " % int % "%")

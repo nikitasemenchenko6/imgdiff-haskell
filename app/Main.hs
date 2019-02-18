@@ -1,5 +1,6 @@
 {-# LANGUAGE ApplicativeDo #-}
 {-# LANGUAGE MultiWayIf    #-}
+{-# LANGUAGE Trustworthy #-}
 
 module Main where
 
@@ -16,6 +17,6 @@ main = do
   let (file1, file2) =
         if | length args == 2 -> (head args, head $ tail args)
            | otherwise -> error "2 args required: imgdiff ./file1.jpg ./file2.jpeg"
-  dist <- distance file1 file2
-  putStrLn $ differenceToString dist
+  dist <- avgDistance file1 file2
+  putStrLn $ show $ differenceToString dist
   pure ()
