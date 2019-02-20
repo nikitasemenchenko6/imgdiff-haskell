@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedLists   #-}
-{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE Trustworthy       #-}
 
 module Format where

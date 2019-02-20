@@ -1,15 +1,13 @@
-{-# LANGUAGE ApplicativeDo #-}
-{-# LANGUAGE MultiWayIf    #-}
 {-# LANGUAGE Trustworthy #-}
 
 module Main where
 
-import           Control.Exception
-import           Data.List
-import           Format
-import           Lib
-import           System.Environment (getArgs)
-import           System.IO          (putStrLn)
+import Control.Exception
+import Data.List
+import Format
+import Lib
+import System.Environment (getArgs)
+import System.IO (putStrLn)
 
 main :: IO ()
 main = do

@@ -30,17 +30,62 @@ dependencies:
 - JuicyPixels >= 3.3.3 && < 4
 - JuicyPixels-extra
 
+# Tests
 - hspec
 - deepseq
 - QuickCheck
 
+# Challenge
+- split
+
 library:
   source-dirs: src
-
+  default-extensions:
+  - OverloadedStrings
+  - GADTs
+  - MultiWayIf
+  - ApplicativeDo
+  - TypeInType
+  - DeriveDataTypeable
+  - DeriveFoldable
+  - DeriveFunctor
+  - DeriveTraversable
+  - DeriveLift
+  - GeneralizedNewtypeDeriving
+  - LambdaCase
+  - DoAndIfThenElse
+  - MonomorphismRestriction
+  - RelaxedPolyRec
+  - TraditionalRecordSyntax
+  - MultiParamTypeClasses
+  - FlexibleInstances
+  - FlexibleContexts
+  - FunctionalDependencies
 executables:
   imgdiff-haskell-exe:
     main:                Main.hs
     source-dirs:         app
+    default-extensions:
+    - OverloadedStrings
+    - GADTs
+    - MultiWayIf
+    - ApplicativeDo
+    - TypeInType
+    - DeriveDataTypeable
+    - DeriveFoldable
+    - DeriveFunctor
+    - DeriveTraversable
+    - DeriveLift
+    - GeneralizedNewtypeDeriving
+    - LambdaCase
+    - DoAndIfThenElse
+    - MonomorphismRestriction
+    - RelaxedPolyRec
+    - TraditionalRecordSyntax
+    - MultiParamTypeClasses
+    - FlexibleInstances
+    - FlexibleContexts
+    - FunctionalDependencies
     ghc-options:
     - -threaded
     - -rtsopts
@@ -52,6 +97,27 @@ tests:
   imgdiff-haskell-test:
     main:                Spec.hs
     source-dirs:         test
+    default-extensions:
+    - OverloadedStrings
+    - GADTs
+    - MultiWayIf
+    - ApplicativeDo
+    - TypeInType
+    - DeriveDataTypeable
+    - DeriveFoldable
+    - DeriveFunctor
+    - DeriveTraversable
+    - DeriveLift
+    - GeneralizedNewtypeDeriving
+    - LambdaCase
+    - DoAndIfThenElse
+    - MonomorphismRestriction
+    - RelaxedPolyRec
+    - TraditionalRecordSyntax
+    - MultiParamTypeClasses
+    - FlexibleInstances
+    - FlexibleContexts
+    - FunctionalDependencies
     ghc-options:
     - -threaded
     - -rtsopts

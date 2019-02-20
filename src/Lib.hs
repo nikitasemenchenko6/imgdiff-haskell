@@ -1,8 +1,3 @@
-{-# LANGUAGE ApplicativeDo        #-}
-{-# LANGUAGE ExtendedDefaultRules #-}
-{-# LANGUAGE MultiWayIf           #-}
-{-# LANGUAGE OverloadedLists      #-}
-{-# LANGUAGE OverloadedStrings    #-}
 {-# LANGUAGE Trustworthy          #-}
 
 module Lib

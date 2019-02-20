@@ -1,10 +1,4 @@
-{-# LANGUAGE ApplicativeDo              #-}
-{-# LANGUAGE ExtendedDefaultRules       #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE MultiWayIf                 #-}
-{-# LANGUAGE OverloadedLists            #-}
-{-# LANGUAGE OverloadedStrings          #-}
-{-# LANGUAGE Trustworthy                #-}
+{-# LANGUAGE Trustworthy            #-}
 
 module Avg where
 

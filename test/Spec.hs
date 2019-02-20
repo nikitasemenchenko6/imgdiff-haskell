@@ -1,14 +1,19 @@
-import Control.DeepSeq (force)
-import Control.Exception (evaluate)
-import Format
-import Lib
-import System.IO (putStrLn)
-import Test.Hspec
-import Test.QuickCheck
+{-# LANGUAGE TypeInType          #-}
+
+import           Control.DeepSeq   (force)
+import           Control.Exception (evaluate)
+
+import           Format
+import           Lib
+import           System.IO         (putStrLn)
+import           Test.Hspec
+import           Test.QuickCheck
+import           Data.List
 
 main :: IO ()
 main =
   hspec $ do
+
     describe "Lib.distance" $ do
       let orig = "test-png-original.png"
       let scaledDown = "test-png-scaled-down.png"
@@ -22,5 +27,6 @@ main =
       it "Scaled Down vs Damaged - 1%" $ do
         r <- avgDistance scaledDown damaged
         r `shouldBe` 3
+
       it "Not existed file, thorow exception" $ do
         (evaluate . force =<< (avgDistance "not-existed-file.png" damaged)) `shouldThrow` anyException

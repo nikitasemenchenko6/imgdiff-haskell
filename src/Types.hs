@@ -1,7 +1,3 @@
-{-# LANGUAGE ApplicativeDo        #-}
-{-# LANGUAGE ExtendedDefaultRules #-}
-{-# LANGUAGE MultiWayIf           #-}
-{-# LANGUAGE OverloadedLists      #-}
 {-# LANGUAGE Trustworthy          #-}
 
 module Types where
