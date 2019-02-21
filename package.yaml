@@ -35,8 +35,10 @@ dependencies:
 - deepseq
 - QuickCheck
 
-# Challenge
-- split
+# Bench
+- criterion
+- weigh
+- random
 
 library:
   source-dirs: src
@@ -61,10 +63,43 @@ library:
   - FlexibleInstances
   - FlexibleContexts
   - FunctionalDependencies
+
 executables:
   imgdiff-haskell-exe:
     main:                Main.hs
     source-dirs:         app
+    default-extensions:
+    - OverloadedStrings
+    - GADTs
+    - MultiWayIf
+    - ApplicativeDo
+    - TypeInType
+    - DeriveDataTypeable
+    - DeriveFoldable
+    - DeriveFunctor
+    - DeriveTraversable
+    - DeriveLift
+    - GeneralizedNewtypeDeriving
+    - LambdaCase
+    - DoAndIfThenElse
+    - MonomorphismRestriction
+    - RelaxedPolyRec
+    - TraditionalRecordSyntax
+    - MultiParamTypeClasses
+    - FlexibleInstances
+    - FlexibleContexts
+    - FunctionalDependencies
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - imgdiff-haskell
+
+benchmarks:
+  imgdiff-haskell-bench:
+    main:                Main.hs
+    source-dirs:         benchmark
     default-extensions:
     - OverloadedStrings
     - GADTs

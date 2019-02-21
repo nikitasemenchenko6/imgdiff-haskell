@@ -25,7 +25,7 @@ instance Algo AvgDigest where
     let img = grayScale $ resize $ convertRGB8 original
     avgHash img (mean img)
 
-resize = Transform.scaleBilinear 16 16
+resize = Transform.scaleBilinear 16 18
 
 mean :: Image PixelRGB8 -> Int
 mean img = colorSum `div` area
