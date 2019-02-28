@@ -7,20 +7,20 @@ module Lib
   ) where
 
 import           Avg
-import           Codec.Picture       (DynamicImage, readPng)
-import           Control.Applicative (liftA2, pure)
-import           Control.Exception   (Exception, throw)
+import           Codec.Picture
+import           Control.Applicative
+import           Control.Concurrent
+import           Control.Concurrent.Async
+import           Control.Exception
 import           Data.Bits
 import           Format
-import           Network.URI         (URI, isURI, parseURI)
-import qualified System.IO           as IO
+import           Network.URI
+import qualified System.IO                as IO
 import           Types
-
 
 avgDistance :: FilePath -> FilePath -> IO Int
 avgDistance file1 file2 = do
-  f1 <- readPng file1
-  f2 <- readPng file2
+  (f1, f2) <- concurrently (readPng file1) (readPng file2)
   pure $ avgDistancePure f1 f2
 
 avgDistancePure :: Either String DynamicImage -> Either String DynamicImage -> Int
@@ -30,4 +30,10 @@ calcAvg :: Either String DynamicImage -> AvgDigest
 calcAvg eitherImg =
   case eitherImg of
     Left e         -> throw (WrongFile e)
-    Right original -> hash original
+    Right original -> avgDigest original
+
+similarity :: (Bits a) => a -> a -> Int
+similarity a b = toPercent . popCount $ a `xor` b
+  where
+    toPercent :: Int -> Int
+    toPercent a = round $ (100 * fromIntegral a) / 64

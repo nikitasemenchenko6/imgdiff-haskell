@@ -1,17 +1,24 @@
-{-# LANGUAGE Trustworthy            #-}
+{-# LANGUAGE Trustworthy #-}
 
-module Avg where
+module Avg
+  ( avgDigest
+  , AvgDigest
+  , grayScaleRGBA8
+  , avgHash
+  , mean
+  , prepare
+  ) where
 
 import           Codec.Picture
 import qualified Codec.Picture.Extra as Transform
-import           Codec.Picture.Types (dropAlphaLayer, pixelFold)
-import           Control.Applicative (pure)
-import           Control.Exception   (Exception, throw)
+import           Codec.Picture.Types
+import           Control.Applicative
+import           Control.Exception
 import           Data.Bits
+import           Data.Typeable
+import           Debug.Trace
 import           Format
 import           Types
-
-instance ImgDigest AvgDigest
 
 instance Show AvgDigest where
   show (AvgDigest a) = show $ leadingBinary a
@@ -20,26 +27,42 @@ newtype AvgDigest =
   AvgDigest Int
   deriving (Eq, Bits)
 
-instance Algo AvgDigest where
-  hash original = do
-    let img = grayScale $ resize $ convertRGB8 original
-    avgHash img (mean img)
+avgDigest :: DynamicImage -> AvgDigest
+avgDigest original = do
+  let img = prepare original
+  avgHash img (mean img)
 
-resize = Transform.scaleBilinear 16 18
+prepare :: DynamicImage -> Image Pixel8
+prepare dynImage = {-# SCC "mean" #-}
+  case dynImage of
+    ImageY8 img     -> undefined
+    ImageY16 img    -> undefined
+    ImageY32 img    -> undefined
+    ImageYF img     -> undefined
+    ImageYA8 img    -> undefined
+    ImageYA16 img   -> undefined
+    ImageRGB8 img   -> undefined
+    ImageRGB16 img  -> undefined
+    ImageRGBF img   -> undefined
+    ImageRGBA8 img  -> grayScaleRGBA8 $ Transform.scaleBilinear 16 16 img
+    ImageRGBA16 img -> undefined
+    ImageYCbCr8 img -> undefined
+    ImageCMYK8 img  -> undefined
+    ImageCMYK16 img -> undefined
 
-mean :: Image PixelRGB8 -> Int
-mean img = colorSum `div` area
+mean :: Image Pixel8 -> Int
+mean img = {-# SCC "mean" #-} colorSum `div` area
   where
     colorSum = pixelFold reducer 0 img :: Int
     area = imageWidth img * imageHeight img :: Int
-    reducer :: Int -> Int -> Int -> PixelRGB8 -> Int
-    reducer acc _ _ (PixelRGB8 r g b) = acc + fromIntegral r
+    reducer :: Int -> Int -> Int -> Pixel8 -> Int
+    reducer acc _ _ r = acc + fromIntegral r
 
-avgHash :: Image PixelRGB8 -> Int -> AvgDigest
-avgHash img mean = AvgDigest . fst $ pixelFold (reducer mean) (0, 1) img
+avgHash :: Image Pixel8 -> Int -> AvgDigest
+avgHash img mean = {-# SCC "mean" #-} AvgDigest . fst $ pixelFold (reducer mean) (0, 1) img
   where
-    reducer :: Int -> ((Int, Int) -> Int -> Int -> PixelRGB8 -> (Int, Int))
-    reducer mean (hash, p) _ _ (PixelRGB8 r g b)
+    reducer :: Int -> ((Int, Int) -> Int -> Int -> Pixel8 -> (Int, Int))
+    reducer mean (hash, p) _ _ r
       | fromIntegral r > mean = (hash .|. p, shiftL p 1)
       | otherwise = (hash, shiftL p 1)
 
@@ -53,13 +76,13 @@ avgHash img mean = AvgDigest . fst $ pixelFold (reducer mean) (0, 1) img
 -- The 16 is 8 + 16
 -- The 8 is because the return value is 8 bit color.
 -- y := (77*r + 150*g + 29*b + 1<<15) >> 8
-pixelToGray :: PixelRGB8 -> PixelRGB8
-pixelToGray (PixelRGB8 r g b) = PixelRGB8 gray gray gray
+pixelToGray :: PixelRGBA8 -> Pixel8
+pixelToGray (PixelRGBA8 r g b _) = gray
   where
     r' = fromIntegral r :: Integer
     g' = fromIntegral g :: Integer
     b' = fromIntegral b :: Integer
     gray = fromInteger $ (77 * r' + 150 * g' + 29 * b' + 1 `shiftL` 15) `shiftR` 8
 
-grayScale :: Image PixelRGB8 -> Image PixelRGB8
-grayScale img@(Image w h _) = generateImage (\x y -> pixelToGray $ pixelAt img x y) w h
+grayScaleRGBA8 :: Image PixelRGBA8 -> Image Pixel8
+grayScaleRGBA8 img@(Image w h _) = generateImage (\x y -> pixelToGray $ pixelAt img x y) w h

@@ -27,8 +27,12 @@ dependencies:
 - text
 - network-uri
 - formatting
+- prettyprinter
 - JuicyPixels >= 3.3.3 && < 4
 - JuicyPixels-extra
+- conduit
+- async
+- stm
 
 # Tests
 - hspec
@@ -40,9 +44,7 @@ dependencies:
 - weigh
 - random
 
-library:
-  source-dirs: src
-  default-extensions:
+default-extensions: &default-extensions
   - OverloadedStrings
   - GADTs
   - MultiWayIf
@@ -63,32 +65,20 @@ library:
   - FlexibleInstances
   - FlexibleContexts
   - FunctionalDependencies
+  - TypeFamilies
+  - BangPatterns
+  - QuasiQuotes
+  - EmptyDataDecls
+
+library:
+  source-dirs: src
+  <<: *default-extensions
 
 executables:
   imgdiff-haskell-exe:
     main:                Main.hs
     source-dirs:         app
-    default-extensions:
-    - OverloadedStrings
-    - GADTs
-    - MultiWayIf
-    - ApplicativeDo
-    - TypeInType
-    - DeriveDataTypeable
-    - DeriveFoldable
-    - DeriveFunctor
-    - DeriveTraversable
-    - DeriveLift
-    - GeneralizedNewtypeDeriving
-    - LambdaCase
-    - DoAndIfThenElse
-    - MonomorphismRestriction
-    - RelaxedPolyRec
-    - TraditionalRecordSyntax
-    - MultiParamTypeClasses
-    - FlexibleInstances
-    - FlexibleContexts
-    - FunctionalDependencies
+    <<: *default-extensions
     ghc-options:
     - -threaded
     - -rtsopts
@@ -100,27 +90,7 @@ benchmarks:
   imgdiff-haskell-bench:
     main:                Main.hs
     source-dirs:         benchmark
-    default-extensions:
-    - OverloadedStrings
-    - GADTs
-    - MultiWayIf
-    - ApplicativeDo
-    - TypeInType
-    - DeriveDataTypeable
-    - DeriveFoldable
-    - DeriveFunctor
-    - DeriveTraversable
-    - DeriveLift
-    - GeneralizedNewtypeDeriving
-    - LambdaCase
-    - DoAndIfThenElse
-    - MonomorphismRestriction
-    - RelaxedPolyRec
-    - TraditionalRecordSyntax
-    - MultiParamTypeClasses
-    - FlexibleInstances
-    - FlexibleContexts
-    - FunctionalDependencies
+    <<: *default-extensions
     ghc-options:
     - -threaded
     - -rtsopts
@@ -132,27 +102,7 @@ tests:
   imgdiff-haskell-test:
     main:                Spec.hs
     source-dirs:         test
-    default-extensions:
-    - OverloadedStrings
-    - GADTs
-    - MultiWayIf
-    - ApplicativeDo
-    - TypeInType
-    - DeriveDataTypeable
-    - DeriveFoldable
-    - DeriveFunctor
-    - DeriveTraversable
-    - DeriveLift
-    - GeneralizedNewtypeDeriving
-    - LambdaCase
-    - DoAndIfThenElse
-    - MonomorphismRestriction
-    - RelaxedPolyRec
-    - TraditionalRecordSyntax
-    - MultiParamTypeClasses
-    - FlexibleInstances
-    - FlexibleContexts
-    - FunctionalDependencies
+    <<: *default-extensions
     ghc-options:
     - -threaded
     - -rtsopts

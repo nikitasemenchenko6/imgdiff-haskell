@@ -60,8 +60,11 @@ imgdiff
 
 
 .stack-work/
+dist-newstyle
 imgdiff-haskell.cabal
 out/
 dist
 
 *~
+*.prof
+*.hp
