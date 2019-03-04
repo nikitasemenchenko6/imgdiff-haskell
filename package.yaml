@@ -31,7 +31,6 @@ dependencies:
 - JuicyPixels >= 3.3.3 && < 4
 - JuicyPixels-extra
 - conduit
-- async
 - stm
 
 # Tests
@@ -69,6 +68,7 @@ default-extensions: &default-extensions
   - BangPatterns
   - QuasiQuotes
   - EmptyDataDecls
+  - TypeApplications
 
 library:
   source-dirs: src

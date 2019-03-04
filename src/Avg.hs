@@ -12,11 +12,8 @@ module Avg
 import           Codec.Picture
 import qualified Codec.Picture.Extra as Transform
 import           Codec.Picture.Types
-import           Control.Applicative
-import           Control.Exception
 import           Data.Bits
 import           Data.Typeable
-import           Debug.Trace
 import           Format
 import           Types
 
@@ -33,7 +30,7 @@ avgDigest original = do
   avgHash img (mean img)
 
 prepare :: DynamicImage -> Image Pixel8
-prepare dynImage = {-# SCC "mean" #-}
+prepare dynImage =
   case dynImage of
     ImageY8 img     -> undefined
     ImageY16 img    -> undefined
@@ -51,7 +48,7 @@ prepare dynImage = {-# SCC "mean" #-}
     ImageCMYK16 img -> undefined
 
 mean :: Image Pixel8 -> Int
-mean img = {-# SCC "mean" #-} colorSum `div` area
+mean img = colorSum `div` area
   where
     colorSum = pixelFold reducer 0 img :: Int
     area = imageWidth img * imageHeight img :: Int
@@ -59,7 +56,7 @@ mean img = {-# SCC "mean" #-} colorSum `div` area
     reducer acc _ _ r = acc + fromIntegral r
 
 avgHash :: Image Pixel8 -> Int -> AvgDigest
-avgHash img mean = {-# SCC "mean" #-} AvgDigest . fst $ pixelFold (reducer mean) (0, 1) img
+avgHash img mean = AvgDigest . fst $ pixelFold (reducer mean) (0, 1) img
   where
     reducer :: Int -> ((Int, Int) -> Int -> Int -> Pixel8 -> (Int, Int))
     reducer mean (hash, p) _ _ r

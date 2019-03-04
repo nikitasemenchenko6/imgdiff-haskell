@@ -1,4 +1,4 @@
-{-# LANGUAGE Trustworthy          #-}
+{-# LANGUAGE Trustworthy #-}
 
 module Types where
 
@@ -7,7 +7,6 @@ import           Control.Applicative
 import           Control.Exception
 import           Data.Bits
 import           Data.Typeable
-import           Format
 
 data LibException
   = WrongFile !String
@@ -15,3 +14,10 @@ data LibException
   deriving (Show, Typeable, Eq, Ord)
 
 instance Exception LibException
+
+newtype Percent =
+  Percent Double
+  deriving (Eq, Ord, Num, Fractional, Floating, Real, RealFrac, RealFloat)
+
+instance Show Percent where
+  show (Percent t) = show t ++ "%"

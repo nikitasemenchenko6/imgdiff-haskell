@@ -15,6 +15,8 @@ main = do
   let (file1, file2) =
         if | length args == 2 -> (head args, head $ tail args)
            | otherwise -> error "2 args required: imgdiff ./file1.jpg ./file2.jpeg"
-  dist <- avgDistance file1 file2
-  putStrLn $ show $ differenceToString dist
+  eitherDist <- avgDistance file1 file2
+  case eitherDist of
+    Left e -> error e
+    Right dist -> putStrLn $ show $ differenceToString dist
   pure ()

@@ -8,9 +8,10 @@ import           System.Random
 
 main :: IO ()
 main = do
+  let toBenchAvgDistance = avgDistance "test-png-original.png"
+
 -- bench time
   defaultMain [bgroup "lib" [
-    bench "avg" $ whnfAppIO toBench 1
+    bench "avg" $ whnfAppIO toBenchAvgDistance "test-png-scaled-down.png"
     ]]
 
-toBench _ = avgDistance "test-png-original.png" "test-png-scaled-down.png"
