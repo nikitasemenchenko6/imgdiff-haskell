@@ -1,6 +1,6 @@
 {-# LANGUAGE Trustworthy #-}
 
-module Avg
+module Img.Hash.Avg
   ( avgDigest
   , AvgDigest
   , grayScaleRGBA8

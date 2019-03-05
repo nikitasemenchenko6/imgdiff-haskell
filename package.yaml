@@ -49,6 +49,10 @@ default-extensions: &default-extensions
   - MultiWayIf
   - ApplicativeDo
   - TypeInType
+  - FlexibleInstances
+  - FlexibleContexts
+  - ConstraintKinds
+  - DataKinds
   - DeriveDataTypeable
   - DeriveFoldable
   - DeriveFunctor
@@ -61,14 +65,18 @@ default-extensions: &default-extensions
   - RelaxedPolyRec
   - TraditionalRecordSyntax
   - MultiParamTypeClasses
-  - FlexibleInstances
-  - FlexibleContexts
   - FunctionalDependencies
   - TypeFamilies
+  - TypeFamilyDependencies
+  - TypeOperators
+  - TypeApplications
+  - ScopedTypeVariables
+  - PackageImports
   - BangPatterns
+  - PatternSynonyms
   - QuasiQuotes
   - EmptyDataDecls
-  - TypeApplications
+  - RecordWildCards
 
 library:
   source-dirs: src
