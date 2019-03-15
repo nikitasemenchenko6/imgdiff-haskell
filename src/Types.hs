@@ -1,12 +1,11 @@
 {-# LANGUAGE Trustworthy #-}
+{-# LANGUAGE DerivingVia #-}
 
 module Types where
 
-import           Codec.Picture       (DynamicImage)
-import           Control.Applicative
 import           Control.Exception
-import           Data.Bits
 import           Data.Typeable
+import           Data.String
 
 data LibException
   = WrongFile !String
@@ -21,3 +20,18 @@ newtype Percent =
 
 instance Show Percent where
   show (Percent t) = show t ++ "%"
+
+------ Validation -------
+data VError
+  = MustNotBeEmpty
+  | IllegalExtension
+  | MustContainPeriod
+  deriving (Show)
+
+newtype ValidFilePath =
+  ValidFilePath FilePath
+  deriving (IsString, Show) via FilePath
+
+newtype CorrectExtension =
+  CorrectExtension String
+  deriving (Show)

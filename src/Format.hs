@@ -3,10 +3,8 @@
 module Format where
 
 import           Data.Text.Lazy
-import           Data.Text.Lazy.Builder (Builder)
 import           Data.Typeable
 import           Formatting
-import           Formatting.Formatters
 import           Types
 
 leadingBinary :: Integral a => a -> Text

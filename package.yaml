@@ -21,17 +21,36 @@ description:         Please see the README on GitHub at <https://github.com/gith
 
 dependencies:
 - base >= 4.7 && < 5
+# Just got default list http://dev.stephendiehl.com/hask/#what-should-be-in-base
+- async
 - bytestring
-- vector
+- containers
 - mtl
+- stm
 - text
+- transformers
+- unordered-containers
+- vector
+- filepath
+- directory
+- process
+- unix
+- deepseq
+- optparse-applicative
+
+# Project Specific
 - network-uri
 - formatting
 - prettyprinter
 - JuicyPixels >= 3.3.3 && < 4
 - JuicyPixels-extra
 - conduit
-- stm
+- validation
+- lens
+- yesod
+- monad-logger
+- filepath
+- rio
 
 # Tests
 - hspec
@@ -44,39 +63,48 @@ dependencies:
 - random
 
 default-extensions: &default-extensions
-  - OverloadedStrings
-  - GADTs
-  - MultiWayIf
-  - ApplicativeDo
-  - TypeInType
-  - FlexibleInstances
-  - FlexibleContexts
+#  From RIO http://hackage.haskell.org/package/rio
+  - AutoDeriveTypeable
+  - BangPatterns
+  - BinaryLiterals
   - ConstraintKinds
   - DataKinds
+  - DefaultSignatures
   - DeriveDataTypeable
   - DeriveFoldable
   - DeriveFunctor
+  - DeriveGeneric
   - DeriveTraversable
-  - DeriveLift
-  - GeneralizedNewtypeDeriving
-  - LambdaCase
   - DoAndIfThenElse
-  - MonomorphismRestriction
-  - RelaxedPolyRec
-  - TraditionalRecordSyntax
-  - MultiParamTypeClasses
-  - FunctionalDependencies
-  - TypeFamilies
-  - TypeFamilyDependencies
-  - TypeOperators
-  - TypeApplications
-  - ScopedTypeVariables
-  - PackageImports
-  - BangPatterns
-  - PatternSynonyms
-  - QuasiQuotes
   - EmptyDataDecls
+  - ExistentialQuantification
+  - FlexibleContexts
+  - FlexibleInstances
+  - FunctionalDependencies
+  - GADTs
+  - GeneralizedNewtypeDeriving
+  - InstanceSigs
+  - KindSignatures
+  - LambdaCase
+  - MonadFailDesugaring
+  - MultiParamTypeClasses
+  - MultiWayIf
+  - NamedFieldPuns
+#  - NoImplicitPrelude
+  - OverloadedStrings
+  - PartialTypeSignatures
+  - PatternGuards
+  - PolyKinds
+  - RankNTypes
   - RecordWildCards
+  - ScopedTypeVariables
+  - StandaloneDeriving
+  - TupleSections
+  - TypeFamilies
+  - TypeSynonymInstances
+  - ViewPatterns
+# From me
+  - ApplicativeDo
 
 library:
   source-dirs: src

@@ -13,9 +13,7 @@ import           Codec.Picture
 import qualified Codec.Picture.Extra as Transform
 import           Codec.Picture.Types
 import           Data.Bits
-import           Data.Typeable
 import           Format
-import           Types
 
 instance Show AvgDigest where
   show (AvgDigest a) = show $ leadingBinary a
@@ -56,11 +54,11 @@ mean img = colorSum `div` area
     reducer acc _ _ r = acc + fromIntegral r
 
 avgHash :: Image Pixel8 -> Int -> AvgDigest
-avgHash img mean = AvgDigest . fst $ pixelFold (reducer mean) (0, 1) img
+avgHash img meanOfImg = AvgDigest . fst $ pixelFold reducer (0, 1) img
   where
-    reducer :: Int -> ((Int, Int) -> Int -> Int -> Pixel8 -> (Int, Int))
-    reducer mean (hash, p) _ _ r
-      | fromIntegral r > mean = (hash .|. p, shiftL p 1)
+    reducer :: ((Int, Int) -> Int -> Int -> Pixel8 -> (Int, Int))
+    reducer (hash, p) _ _ r
+      | fromIntegral r > meanOfImg = (hash .|. p, shiftL p 1)
       | otherwise = (hash, shiftL p 1)
 
 -- These coefficients (the fractions 0.299, 0.587 and 0.114) are the same
@@ -74,12 +72,12 @@ avgHash img mean = AvgDigest . fst $ pixelFold (reducer mean) (0, 1) img
 -- The 8 is because the return value is 8 bit color.
 -- y := (77*r + 150*g + 29*b + 1<<15) >> 8
 pixelToGray :: PixelRGBA8 -> Pixel8
-pixelToGray (PixelRGBA8 r g b _) = gray
+pixelToGray (PixelRGBA8 r g b _) = fromInteger gray
   where
-    r' = fromIntegral r :: Integer
-    g' = fromIntegral g :: Integer
-    b' = fromIntegral b :: Integer
-    gray = fromInteger $ (77 * r' + 150 * g' + 29 * b' + 1 `shiftL` 15) `shiftR` 8
+    r' = toInteger r
+    g' = toInteger g
+    b' = toInteger b
+    gray = (77 * r' + 150 * g' + 29 * b' + 1 `shiftL` 15) `shiftR` 8
 
 grayScaleRGBA8 :: Image PixelRGBA8 -> Image Pixel8
 grayScaleRGBA8 img@(Image w h _) = generateImage (\x y -> pixelToGray $ pixelAt img x y) w h

@@ -9,12 +9,10 @@ module Lib
 import           Img.Hash.Avg
 import           Codec.Picture
 import           Data.Bits
-import           Format
-import           Network.URI
 import           Types
 
-avgDistance :: FilePath -> FilePath -> IO (Either String Percent)
-avgDistance file1 file2 = do
+avgDistance :: ValidFilePath -> ValidFilePath -> IO (Either String Percent)
+avgDistance (ValidFilePath file1) (ValidFilePath file2) = do
   f1 <- readPng file1
   f2 <- readPng file2
   let res = pure avgDistancePure <*> f1 <*> f2
