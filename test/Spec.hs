@@ -1,10 +1,9 @@
 {-# LANGUAGE TypeInType #-}
 
-import Format
+import RIO
+
 import Lib
 import Test.Hspec
-import Test.QuickCheck
-import RIO
 
 main :: IO ()
 main = hspec $ do

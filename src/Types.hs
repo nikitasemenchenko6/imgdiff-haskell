@@ -1,14 +1,13 @@
 {-# LANGUAGE Trustworthy #-}
-{-# LANGUAGE DerivingVia #-}
 
 module Types where
 
-import           Control.Exception
-import           Data.Typeable
-import           Data.String
-import           RIO
-import           RIO.Process
+import RIO
 
+import Control.Exception
+import Data.Typeable
+import Data.String
+import RIO.Process
 
 -- | Command line arguments
 data Options = Options
@@ -56,7 +55,7 @@ data VError
 
 newtype ValidFilePath =
   ValidFilePath FilePath
-  deriving (IsString, Show) via FilePath
+  deriving (IsString, Show)
 
 newtype CorrectExtension =
   CorrectExtension String

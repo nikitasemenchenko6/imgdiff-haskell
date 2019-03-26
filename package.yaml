@@ -7,8 +7,8 @@ maintainer:          "example@example.com"
 copyright:           "2019 Author name here"
 
 extra-source-files:
-- README.md
-- ChangeLog.md
+  - README.md
+  - ChangeLog.md
 
 # Metadata used when publishing your package
 # synopsis:            Short description of your package
@@ -20,42 +20,32 @@ extra-source-files:
 description:         Please see the README on GitHub at <https://github.com/githubuser/imgdiff-haskell#readme>
 
 dependencies:
-- base >= 4.7 && < 5
-# Just got default list http://dev.stephendiehl.com/hask/#what-should-be-in-base
-- async
-- stm
-- transformers
-- unordered-containers
-- vector
-- filepath
-- process
-- unix
-- optparse-applicative
-- optparse-simple
+  - base >= 4.7 && < 5
+  # Just got default list http://dev.stephendiehl.com/hask/#what-should-be-in-base
+  - async
+  - stm
+  - transformers
+  - unordered-containers
+  - vector
+  - filepath
+  - process
+  - unix
+  - optparse-applicative
+  - optparse-simple
 
-# Project Specific
-- network-uri
-- formatting
-- prettyprinter
-- JuicyPixels >= 3.3.3 && < 4
-- JuicyPixels-extra
-- conduit
-- validation
-- yesod
-- rio
-
-# Tests
-- hspec
-- deepseq
-- QuickCheck
-
-# Bench
-- criterion
-- weigh
-- random
+  # Project Specific
+  - network-uri
+  - formatting
+  - prettyprinter
+  - JuicyPixels >= 3.3.3 && < 4
+  - JuicyPixels-extra
+  - conduit
+  - validation
+  - yesod
+  - rio
 
 default-extensions: &default-extensions
-#  From RIO http://hackage.haskell.org/package/rio
+  #  From RIO http://hackage.haskell.org/package/rio
   - AutoDeriveTypeable
   - BangPatterns
   - BinaryLiterals
@@ -95,12 +85,13 @@ default-extensions: &default-extensions
   - TypeFamilies
   - TypeSynonymInstances
   - ViewPatterns
-# From me
+  # From me
   - ApplicativeDo
 
 library:
   source-dirs: src
   <<: *default-extensions
+
 
 executables:
   imgdiff-haskell-exe:
@@ -108,11 +99,11 @@ executables:
     source-dirs:         app
     <<: *default-extensions
     ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
     dependencies:
-    - imgdiff-haskell
+      - imgdiff-haskell
 
 benchmarks:
   imgdiff-haskell-bench:
@@ -120,11 +111,14 @@ benchmarks:
     source-dirs:         benchmark
     <<: *default-extensions
     ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
     dependencies:
-    - imgdiff-haskell
+      - imgdiff-haskell
+      - criterion
+      - weigh
+
 
 tests:
   imgdiff-haskell-test:
@@ -132,18 +126,22 @@ tests:
     source-dirs:         test
     <<: *default-extensions
     ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
     dependencies:
-    - imgdiff-haskell
+      - imgdiff-haskell
+      - hspec
+      - deepseq
+      - QuickCheck
+
 
 
 ghc-options:
-- -Wall
-- -Wcompat
-- -Widentities
-- -Wincomplete-record-updates
-- -Wincomplete-uni-patterns
-- -Wpartial-fields
-- -Wredundant-constraints
+  - -Wall
+  - -Wcompat
+  - -Widentities
+  - -Wincomplete-record-updates
+  - -Wincomplete-uni-patterns
+  - -Wpartial-fields
+  - -Wredundant-constraints
