@@ -2,16 +2,17 @@
 
 module Format where
 
-import           Data.Text.Lazy
 import           Data.Typeable
 import           Formatting
+import           RIO
+import qualified RIO.Text.Lazy as TL
 import           Types
 
-leadingBinary :: Integral a => a -> Text
+leadingBinary :: Integral a => a -> TL.Text
 leadingBinary = format prefixBin
 
-typeWithVal :: (Show a, Typeable a) => a -> Text
+typeWithVal :: (Show a, Typeable a) => a -> TL.Text
 typeWithVal a = format ("Type: " % shown % ", Val: " % shown) (show $ typeOf a) a
 
-differenceToString :: Percent -> Text
+differenceToString :: Percent -> TL.Text
 differenceToString = format ("Diffeernce: " % shown % "%")

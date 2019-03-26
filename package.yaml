@@ -23,20 +23,15 @@ dependencies:
 - base >= 4.7 && < 5
 # Just got default list http://dev.stephendiehl.com/hask/#what-should-be-in-base
 - async
-- bytestring
-- containers
-- mtl
 - stm
-- text
 - transformers
 - unordered-containers
 - vector
 - filepath
-- directory
 - process
 - unix
-- deepseq
 - optparse-applicative
+- optparse-simple
 
 # Project Specific
 - network-uri
@@ -46,10 +41,7 @@ dependencies:
 - JuicyPixels-extra
 - conduit
 - validation
-- lens
 - yesod
-- monad-logger
-- filepath
 - rio
 
 # Tests
@@ -90,7 +82,7 @@ default-extensions: &default-extensions
   - MultiParamTypeClasses
   - MultiWayIf
   - NamedFieldPuns
-#  - NoImplicitPrelude
+  - NoImplicitPrelude
   - OverloadedStrings
   - PartialTypeSignatures
   - PatternGuards
@@ -145,3 +137,13 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - imgdiff-haskell
+
+
+ghc-options:
+- -Wall
+- -Wcompat
+- -Widentities
+- -Wincomplete-record-updates
+- -Wincomplete-uni-patterns
+- -Wpartial-fields
+- -Wredundant-constraints

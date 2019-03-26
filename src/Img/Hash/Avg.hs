@@ -9,6 +9,8 @@ module Img.Hash.Avg
   , prepare
   ) where
 
+import           RIO
+
 import           Codec.Picture
 import qualified Codec.Picture.Extra as Transform
 import           Codec.Picture.Types

@@ -6,9 +6,10 @@ module Lib
   , LibException(..)
   ) where
 
-import           Img.Hash.Avg
 import           Codec.Picture
 import           Data.Bits
+import           Img.Hash.Avg
+import           RIO
 import           Types
 
 avgDistance :: ValidFilePath -> ValidFilePath -> IO (Either String Percent)
@@ -21,7 +22,7 @@ avgDistance (ValidFilePath file1) (ValidFilePath file2) = do
 avgDistancePure :: DynamicImage -> DynamicImage -> Percent
 avgDistancePure f1 f2 = avgDigest f1 `similarity` avgDigest f2
   where
-  similarity :: (Bits a) => a -> a -> Percent
-  similarity a b = toPercent . popCount $ a `xor` b
-  toPercent :: Int -> Percent
-  toPercent a = Percent $ (100 * fromIntegral a) / 64
+    similarity :: (Bits a) => a -> a -> Percent
+    similarity a b = toPercent . popCount $ a `xor` b
+    toPercent :: Int -> Percent
+    toPercent a = Percent $ (100 * fromIntegral a) / 64

@@ -6,6 +6,32 @@ module Types where
 import           Control.Exception
 import           Data.Typeable
 import           Data.String
+import           RIO
+import           RIO.Process
+
+
+-- | Command line arguments
+data Options = Options
+  {
+    optionsVerbose :: !Bool,
+    f1 :: !String,
+    f2 :: !String
+  }
+
+data App = App
+  { appLogFunc :: !LogFunc
+  , appProcessContext :: !ProcessContext
+  , appOptions :: !Options
+  -- Add other app-specific configuration information here
+  }
+
+instance HasLogFunc App where
+  logFuncL = lens appLogFunc (\x y -> x { appLogFunc = y })
+
+instance HasProcessContext App where
+  processContextL = lens appProcessContext (\x y -> x { appProcessContext = y })
+
+
 
 data LibException
   = WrongFile !String
@@ -35,3 +61,5 @@ newtype ValidFilePath =
 newtype CorrectExtension =
   CorrectExtension String
   deriving (Show)
+
+
