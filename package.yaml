@@ -41,7 +41,6 @@ dependencies:
   - JuicyPixels-extra
   - conduit
   - validation
-  - yesod
   - rio
 
 default-extensions: &default-extensions

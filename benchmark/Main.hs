@@ -2,7 +2,6 @@ module Main where
 
 import RIO
 
-import Codec.Picture
 import Criterion
 import Criterion.Main (defaultMain)
 import Lib

@@ -4,9 +4,6 @@ module Types where
 
 import RIO
 
-import Control.Exception
-import Data.Typeable
-import Data.String
 import RIO.Process
 
 -- | Command line arguments

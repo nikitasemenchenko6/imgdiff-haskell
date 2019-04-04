@@ -32,20 +32,20 @@ avgDigest original = do
 
 prepare :: DynamicImage -> Image Pixel8
 prepare dynImage = case dynImage of
-  ImageY8     img -> undefined
-  ImageY16    img -> undefined
-  ImageY32    img -> undefined
-  ImageYF     img -> undefined
-  ImageYA8    img -> undefined
-  ImageYA16   img -> undefined
-  ImageRGB8   img -> undefined
-  ImageRGB16  img -> undefined
-  ImageRGBF   img -> undefined
+  ImageY8     _ -> undefined
+  ImageY16    _ -> undefined
+  ImageY32    _ -> undefined
+  ImageYF     _ -> undefined
+  ImageYA8    _ -> undefined
+  ImageYA16   _ -> undefined
+  ImageRGB8   _ -> undefined
+  ImageRGB16  _ -> undefined
+  ImageRGBF   _ -> undefined
   ImageRGBA8  img -> grayScaleRGBA8 $ Transform.scaleBilinear 16 16 img
-  ImageRGBA16 img -> undefined
-  ImageYCbCr8 img -> undefined
-  ImageCMYK8  img -> undefined
-  ImageCMYK16 img -> undefined
+  ImageRGBA16 _ -> undefined
+  ImageYCbCr8 _ -> undefined
+  ImageCMYK8  _ -> undefined
+  ImageCMYK16 _ -> undefined
 
 mean :: Image Pixel8 -> Int
 mean img = colorSum `div` area
