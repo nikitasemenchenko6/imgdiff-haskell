@@ -17,9 +17,8 @@ main = do
   opts <- options
   lo   <- logOptionsHandle stderr (optionsVerbose opts)
   pc   <- mkDefaultProcessContext
-  withLogFunc lo $ \lf ->
-    let app = App {appLogFunc = lf, appProcessContext = pc, appOptions = opts}
-    in runRIO app run
+  withLogFunc lo
+    $ \lf -> let app = App { appLogFunc = lf, appProcessContext = pc, appOptions = opts } in runRIO app run
 
 --      $(simpleVersion "1.2.1" :: Version)
 run :: RIO App ()

@@ -43,6 +43,14 @@ dependencies:
   - validation
   - rio
 
+  - time
+  - servant
+  - servant-server
+  - transformers
+  - aeson
+  - wai
+  - warp
+
 default-extensions: &default-extensions
   #  From RIO http://hackage.haskell.org/package/rio
   - AutoDeriveTypeable
@@ -104,6 +112,17 @@ executables:
     dependencies:
       - imgdiff-haskell
 
+  web:
+    main:                Main.hs
+    source-dirs:         web
+    <<: *default-extensions
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+    dependencies:
+      - imgdiff-haskell
+
 benchmarks:
   imgdiff-haskell-bench:
     main:                Main.hs
@@ -133,7 +152,10 @@ tests:
       - hspec
       - deepseq
       - QuickCheck
-
+      - servant-client
+      - warp >= 3.2.4
+      - http-client
+      - http-types
 
 
 ghc-options:

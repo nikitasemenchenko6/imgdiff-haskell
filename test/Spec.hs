@@ -22,6 +22,4 @@ main = hspec $ do
       r `shouldBe` Right 3.125
     it "Not existed file, thorow exception" $ do
       r <- avgDistance "not-existed-file.png" damaged
-      r
-        `shouldBe` Left
-                    "not-existed-file.png: openBinaryFile: does not exist (No such file or directory)"
+      r `shouldBe` Left "not-existed-file.png: openBinaryFile: does not exist (No such file or directory)"
