@@ -7,12 +7,10 @@
 {-# LANGUAGE TypeOperators         #-}
 
 module Web.Server
-  ( listen
-  , app
-  )
-where
+  ( app
+  ) where
 
-import RIO
+import           RIO
 
 --import Control.Monad.Except
 --import Control.Monad.Reader
@@ -29,12 +27,10 @@ import RIO
 --import Servant.Types.SourceT (source)
 --import qualified Data.Aeson.Parser
 --import qualified Text.Blaze.Html
-import Data.Aeson
-import Data.Time.Calendar
-import Network.Wai
-import Network.Wai.Handler.Warp
-import Servant
-import System.IO
+import           Data.Aeson
+import           Data.Time.Calendar
+import           Network.Wai
+import           Servant
 
 server :: Server HelloAPI
 server = return users
@@ -56,8 +52,8 @@ instance FromJSON User
 
 users :: [User]
 users =
-  [ User "Isaac Newton"    372 "isaac@newton.co.uk" (fromGregorian 1683 3 1)
-  , User "Albert Einstein" 136 "ae@mc2.org"         (fromGregorian 1905 12 1)
+  [ User "Isaac Newton" 372 "isaac@newton.co.uk" (fromGregorian 1683 3 1)
+  , User "Albert Einstein" 136 "ae@mc2.org" (fromGregorian 1905 12 1)
   ]
 
 userAPI = Proxy :: Proxy HelloAPI
@@ -67,11 +63,3 @@ userAPI = Proxy :: Proxy HelloAPI
 -- not yet a webserver.
 app :: Application
 app = serve userAPI server
-
-listen :: IO ()
-listen = runSettings settings app
- where
-  logSettings = hPutStrLn stderr ("listening on port " ++ show port ++ ": " ++ show host)
-  port        = 3000
-  host        = "localhost"
-  settings    = setPort port $ setHost host $ setBeforeMainLoop (logSettings) $ defaultSettings
