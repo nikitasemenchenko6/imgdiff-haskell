@@ -8,9 +8,10 @@
 
 module Web.Server
   ( app
-  ) where
+  )
+where
 
-import           RIO
+import RIO
 
 --import Control.Monad.Except
 --import Control.Monad.Reader
@@ -27,10 +28,9 @@ import           RIO
 --import Servant.Types.SourceT (source)
 --import qualified Data.Aeson.Parser
 --import qualified Text.Blaze.Html
-import           Data.Aeson
-import           Data.Time.Calendar
-import           Network.Wai
-import           Servant
+import qualified Data.Aeson as Aeson
+import Data.Time.Calendar
+import Servant
 
 server :: Server HelloAPI
 server = return users
@@ -46,14 +46,14 @@ data User =
     }
   deriving (Eq, Show, Generic)
 
-instance ToJSON User
+instance Aeson.ToJSON User
 
-instance FromJSON User
+instance Aeson.FromJSON User
 
 users :: [User]
 users =
-  [ User "Isaac Newton" 372 "isaac@newton.co.uk" (fromGregorian 1683 3 1)
-  , User "Albert Einstein" 136 "ae@mc2.org" (fromGregorian 1905 12 1)
+  [ User "Isaac Newton"    372 "isaac@newton.co.uk" (fromGregorian 1683 3 1)
+  , User "Albert Einstein" 136 "ae@mc2.org"         (fromGregorian 1905 12 1)
   ]
 
 userAPI = Proxy :: Proxy HelloAPI

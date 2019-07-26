@@ -14,17 +14,11 @@ import Types
 
 options :: IO Options
 options = do
-  (opts, ()) <- simpleOptions
-    $(simpleVersion version)
-    title
-    description
-    (   Options
-    <$> switch (long "verbose" <> short 'v' <> help "Verbose output?")
-    <*> strOption (long "f1" <> help "File 1")
-    <*> strOption (long "f2" <> help "File 2")
-    )
-    empty
+  (opts, ()) <- simpleOptions $(simpleVersion version) title description (Options <$> getVersion <*> f1 <*> f2) empty
   return opts
  where
+  getVersion  = switch (long "verbose" <> short 'v' <> help "Verbose output?")
+  f1          = strOption (long "f1" <> help "File 1")
+  f2          = strOption (long "f2" <> help "File 2")
   title       = "Header for command line arguments"
   description = "Program description, also for command line arguments"

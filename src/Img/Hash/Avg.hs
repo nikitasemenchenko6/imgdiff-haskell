@@ -12,14 +12,13 @@ where
 
 import RIO
 
-import Codec.Picture
 import qualified Codec.Picture.Extra as Transform
 import Codec.Picture.Types
-import Data.Bits
-import Format
+import Data.Bits (Bits)
+import qualified Format
 
 instance Show AvgDigest where
-  show (AvgDigest a) = show $ leadingBinary a
+  show (AvgDigest a) = show $ Format.leadingBinary a
 
 newtype AvgDigest =
   AvgDigest Int
