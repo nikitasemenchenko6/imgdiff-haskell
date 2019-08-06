@@ -4,12 +4,12 @@ module Main where
 
 import           RIO
 
-import           RIO.FilePath
-import           RIO.Process
 import           Data.Validation
 import           Format
 import           Lib
 import           Options         (options)
+import           RIO.FilePath
+import           RIO.Process
 import           Types
 
 main :: IO ()
