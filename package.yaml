@@ -22,26 +22,19 @@ description:         Please see the README on GitHub at <https://github.com/gith
 dependencies:
   - base >= 4.7 && < 5
   # Just got default list http://dev.stephendiehl.com/hask/#what-should-be-in-base
-  - async
-  - stm
-  - transformers
-  - unix
   - optparse-applicative
   - optparse-simple
 
   # Project Specific
-  - network-uri
   - formatting
   - prettyprinter
   - JuicyPixels >= 3.3.3 && < 4
   - JuicyPixels-extra
-  - conduit
   - validation
   - rio
 
   - servant
   - servant-server
-  - transformers
   - aeson
   - wai
   - warp

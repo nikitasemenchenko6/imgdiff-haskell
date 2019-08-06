@@ -5,7 +5,7 @@ module Main where
 import           RIO
 
 import qualified Network.Wai.Handler.Warp as Warp
-import           System.IO
+import System.IO (hPutStrLn, stderr)
 import qualified Web.Server
 
 main :: IO ()
