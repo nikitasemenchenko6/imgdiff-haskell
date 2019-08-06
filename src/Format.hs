@@ -2,12 +2,12 @@
 
 module Format where
 
-import RIO
+import           RIO
 
-import Data.Typeable
-import Formatting
+import           Data.Typeable
+import           Formatting
 import qualified RIO.Text.Lazy as TL
-import Types
+import           Types
 
 leadingBinary :: Integral a => a -> TL.Text
 leadingBinary = format prefixBin

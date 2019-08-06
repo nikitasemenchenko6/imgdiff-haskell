@@ -14,7 +14,7 @@ import RIO
 
 import qualified Codec.Picture.Extra as Transform
 import Codec.Picture.Types
-import Data.Bits (Bits)
+import Data.Bits
 import qualified Format
 
 instance Show AvgDigest where

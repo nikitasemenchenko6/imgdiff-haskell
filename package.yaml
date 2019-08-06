@@ -25,10 +25,6 @@ dependencies:
   - async
   - stm
   - transformers
-  - unordered-containers
-  - vector
-  - filepath
-  - process
   - unix
   - optparse-applicative
   - optparse-simple
@@ -43,7 +39,6 @@ dependencies:
   - validation
   - rio
 
-  - time
   - servant
   - servant-server
   - transformers
@@ -166,3 +161,4 @@ ghc-options:
   - -Wincomplete-uni-patterns
   - -Wpartial-fields
   - -Wredundant-constraints
+  - -optP-Wno-nonportable-include-path

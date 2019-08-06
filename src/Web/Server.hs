@@ -8,10 +8,9 @@
 
 module Web.Server
   ( app
-  )
-where
+  ) where
 
-import RIO
+import           RIO
 
 --import Control.Monad.Except
 --import Control.Monad.Reader
@@ -29,13 +28,9 @@ import RIO
 --import qualified Data.Aeson.Parser
 --import qualified Text.Blaze.Html
 import qualified Data.Aeson as Aeson
-import Data.Time.Calendar
-import Servant
-
-server :: Server HelloAPI
-server = return users
-
-type HelloAPI = "hello" :> Get '[ JSON] [User]
+import           Data.List
+import           RIO.Time
+import           Servant
 
 data User =
   User
@@ -52,14 +47,27 @@ instance Aeson.FromJSON User
 
 users :: [User]
 users =
-  [ User "Isaac Newton"    372 "isaac@newton.co.uk" (fromGregorian 1683 3 1)
-  , User "Albert Einstein" 136 "ae@mc2.org"         (fromGregorian 1905 12 1)
+  [ User "Isaac Newton" 372 "isaac@newton.co.uk" (fromGregorian 1683 3 1)
+  , User "Albert Einstein" 136 "ae@mc2.org" (fromGregorian 1905 12 1)
   ]
 
-userAPI = Proxy :: Proxy HelloAPI
+type HelloResponse = [User]
+
+type WorldResponse = User
+
+type API = "hello" :> Get '[ JSON] HelloResponse :<|> "world" :> Capture "x" Int :> Get '[ JSON] WorldResponse
+
+server :: Server API
+server = hello :<|> world
+  where
+    hello = return users
+    world x = return (users !! x)
+
+api :: Proxy API
+api = Proxy
 
 -- 'serve' comes from servant and hands you a WAI Application,
 -- which you can think of as an "abstract" web application,
 -- not yet a webserver.
 app :: Application
-app = serve userAPI server
+app = serve api server
