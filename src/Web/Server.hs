@@ -55,13 +55,22 @@ type HelloResponse = [User]
 
 type WorldResponse = User
 
-type API = "hello" :> Get '[ JSON] HelloResponse :<|> "world" :> Capture "x" Int :> Get '[ JSON] WorldResponse
+type WorldResponse2 = User
+
+type API
+   -- /hello endpoint
+   = "hello" :> Get '[ JSON] HelloResponse
+     -- /world endpoint
+      :<|> "world" :> Capture "x" Int :> Get '[ JSON] WorldResponse
+     -- /world2 endpoint
+      :<|> "world2" :> Capture "x" Int :> Get '[ JSON] WorldResponse2
 
 server :: Server API
-server = hello :<|> world
+server = hello :<|> world :<|> world2
   where
     hello = return users
     world x = return (users !! x)
+    world2 x = return (users !! x)
 
 api :: Proxy API
 api = Proxy

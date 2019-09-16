@@ -32,6 +32,7 @@ dependencies:
   - JuicyPixels-extra
   - validation
   - rio
+  - stm
 
   - servant
   - servant-server

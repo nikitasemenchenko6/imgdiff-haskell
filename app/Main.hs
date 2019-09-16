@@ -10,6 +10,7 @@ import           Lib
 import           Options         (options)
 import           RIO.FilePath
 import           RIO.Process
+import           System.IO       (stderr)
 import           Types
 
 main :: IO ()
