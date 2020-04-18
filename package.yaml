@@ -28,7 +28,7 @@ dependencies:
   # Project Specific
   - formatting
   - prettyprinter
-  - JuicyPixels >= 3.3.3 && < 4
+  - JuicyPixels
   - JuicyPixels-extra
   - validation
   - rio

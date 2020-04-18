@@ -24,9 +24,10 @@ newtype AvgDigest =
   deriving (Eq, Bits)
 
 avgDigest :: DynamicImage -> AvgDigest
-avgDigest original = do
-  let img = prepare original
-  avgHash img (mean img)
+avgDigest original = traceShow r r
+    where
+      img = prepare original
+      r = avgHash img (mean img)
 
 prepare :: DynamicImage -> Image Pixel8
 prepare dynImage =
