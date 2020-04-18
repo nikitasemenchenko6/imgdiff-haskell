@@ -42,7 +42,6 @@ dependencies:
 
 default-extensions: &default-extensions
   #  From RIO http://hackage.haskell.org/package/rio
-  - AutoDeriveTypeable
   - BangPatterns
   - BinaryLiterals
   - ConstraintKinds
@@ -64,7 +63,6 @@ default-extensions: &default-extensions
   - InstanceSigs
   - KindSignatures
   - LambdaCase
-  - MonadFailDesugaring
   - MultiParamTypeClasses
   - MultiWayIf
   - NamedFieldPuns
